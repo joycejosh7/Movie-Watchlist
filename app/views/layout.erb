@@ -10,20 +10,34 @@
     <title>MovieWatchlist</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    
   </head>
   <body>
-    <div class="wrapper">
+    <nav class= "red darken-1">
+      <div class="nav-wrapper container">
+        <a href="/" class="brand-logo black-text">Movie Watchlist</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="#"class="black-text">Login</a></li>
+          <li><a href="#"class="black-text">Signup</a></li>
+          <li><a href="#"class="black-text">Logout</a></li>
+          <li><a href="/movies"class="black-text">Movies</a></li>
+          <li><a href="/movies/new"class="black-text">Add Movie</a></li>
+        </ul>
+      </div>
+    </nav>
 
-        <%= yield %>
+      <div class="container">
+      <%= yield %>
+      </div>
 
-      <footer class="branding">
-        <small>&copy; 2021 <strong>MovieWatchlist</strong></small>
-      </footer>
-    </div>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    
     <!--[if lt IE 7]>
       <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
       <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
