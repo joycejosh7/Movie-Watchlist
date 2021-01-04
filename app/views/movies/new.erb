@@ -1,0 +1,24 @@
+<h2>Add Movie</h2>
+
+<form action="/movies" method="post">
+    <div class="input-field">
+        <input id="title" name="movie[title]" type="text" class="validate">
+        <label for="title">Title</label>
+    </div>
+    <div class="input-field">
+        <input type="text" class="datepicker" name="movie[release_date]" id="release_date">
+        <label for="release_date">Release Date</label>
+    </div>
+    <div class="input-field">
+        <input id="genre" name="movie[genre]" type="text" class="validate">
+        <label for="genre">Genre</label>
+    </div>
+
+    <input type="submit" value="Add Movie" class="btn black">
+</form>
+
+<script>
+    $(document).ready(function(){
+        $('.datepicker').datepicker();
+    });
+</script>
