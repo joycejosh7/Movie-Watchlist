@@ -2,4 +2,8 @@
 <p>Release Date: <%= @movie.release_date %></p>
 <p>Genre: <%= @movie.genre %></p>
 
-<a href="/movies/<%= @movie.id %>/edit">Edit</a>
+<form action="/movies/<%= @movie.id %>" method="post">
+    <a href="/movies/<%= @movie.id %>/edit" class="btn-small">Edit Movie</a>
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Movie" class="btn-small red white-text">
+</form>

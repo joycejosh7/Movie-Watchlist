@@ -10,11 +10,13 @@ class MoviesController < ApplicationController
 
     get '/movies/:id/edit' do
         find_movie
+        redirect_if_movie_not_found
         erb :'/movies/edit'
     end
 
     get '/movies/:id' do
         find_movie
+        redirect_if_movie_not_found
         erb :'movies/show'
     end
 
@@ -30,15 +32,26 @@ class MoviesController < ApplicationController
 
     patch '/movies/:id' do
         find_movie
+        redirect_if_movie_not_found
         if @movie.update(params[:movie])
             redirect "/movies/#{@movie.id}"
         else  
             redirect "/movies/#{@movie.id}/edit"
         end
-      end
+    end
+
+    delete '/movies/:id' do
+        find_movie
+        @movie.destroy if @movie
+        redirect "/movies"
+    end
 
     private
         def find_movie
             @movie = Movie.find_by_id(params[:id])
+        end
+
+        def redirect_if_movie_not_found
+            redirect "/movies" unless @movie
         end
 end
