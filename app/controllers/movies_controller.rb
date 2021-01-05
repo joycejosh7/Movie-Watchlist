@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
     get '/movies' do
         @movies = Movie.all 
+        @movie = Movie.find_by_id(session[:movie_id])
         erb :'movies/index'
     end
 
@@ -16,6 +17,7 @@ class MoviesController < ApplicationController
 
     get '/movies/:id' do
         find_movie
+        session[:movie_id] = @movie.id if @movie
         redirect_if_movie_not_found
         erb :'movies/show'
     end

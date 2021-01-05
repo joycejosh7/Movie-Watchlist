@@ -1,5 +1,7 @@
 <h3>Movie List</h3>
 
+<p>Recently Viewed: <%= @movie ? @movie.title : "Haven't viewed any movies." %></p>
+
 <ul>
     <% @movies.each do |movie| %>
         <li><a href="/movies/<%= movie.id %>"><%= movie.title %></a></li>
