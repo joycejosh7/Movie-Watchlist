@@ -1,0 +1,25 @@
+<h2>Edit <%= @movie.title %></h2>
+
+<form action="/movies/<%= @movie.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <div class="input-field">
+        <input id="title" name="movie[title]" type="text" class="validate" value="<%= @movie.title %>">
+        <label for="title">Title</label>
+    </div>
+    <div class="input-field">
+        <input type="text" class="datepicker" name="movie[release_date]" id="release_date" value="<%= @movie.release_date %>">
+        <label for="release_date">Release Date</label>
+    </div>
+    <div class="input-field">
+        <input id="genre" name="movie[genre]" type="text" class="validate" value="<%= @movie.genre %>">
+        <label for="genre">Genre</label>
+    </div>
+
+    <input type="submit" value="Update Movie" class="btn black">
+</form>
+
+<script>
+    $(document).ready(function(){
+        $('.datepicker').datepicker();
+    });
+</script>

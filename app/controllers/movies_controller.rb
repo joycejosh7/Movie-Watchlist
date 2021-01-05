@@ -8,8 +8,13 @@ class MoviesController < ApplicationController
         erb :'movies/new'
     end
 
+    get '/movies/:id/edit' do
+        find_movie
+        erb :'/movies/edit'
+    end
+
     get '/movies/:id' do
-        @movie = Movie.find_by_id(params[:id])
+        find_movie
         erb :'movies/show'
     end
 
@@ -22,4 +27,18 @@ class MoviesController < ApplicationController
             redirect '/movies/new'
         end
     end
+
+    patch '/movies/:id' do
+        find_movie
+        if @movie.update(params[:movie])
+            redirect "/movies/#{@movie.id}"
+        else  
+            redirect "/movies/#{@movie.id}/edit"
+        end
+      end
+
+    private
+        def find_movie
+            @movie = Movie.find_by_id(params[:id])
+        end
 end
