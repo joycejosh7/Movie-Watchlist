@@ -23,11 +23,14 @@
       <div class="nav-wrapper container">
         <a href="/" class="brand-logo black-text">Movie Watchlist</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="#"class="black-text">Login</a></li>
-          <li><a href="#"class="black-text">Signup</a></li>
-          <li><a href="#"class="black-text">Logout</a></li>
+          <% if !is_logged_in? %>
+          <li><a href="/login"class="black-text">Login</a></li>
+          <li><a href="/signup"class="black-text">Signup</a></li>
+          <% else %>
+          <li><a href="/logout"class="black-text">Logout</a></li>
           <li><a href="/movies"class="black-text">Movies</a></li>
           <li><a href="/movies/new"class="black-text">Add Movie</a></li>
+          <% end %>
         </ul>
       </div>
     </nav>
