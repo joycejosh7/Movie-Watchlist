@@ -33,6 +33,7 @@ class MoviesController < ApplicationController
         if movie.save
             redirect '/movies'
         else  
+            flash[:errors] = movie.errors.full_messages
             redirect '/movies/new'
         end
     end
