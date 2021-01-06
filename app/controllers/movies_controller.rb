@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
     get '/movies' do
         redirect_if_not_logged_in
-        @movies = Movie.all 
+        @movies = current_user.movies
         @movie = Movie.find_by_id(session[:movie_id])
         erb :'movies/index'
     end
@@ -15,20 +15,21 @@ class MoviesController < ApplicationController
         redirect_if_not_logged_in
         find_movie
         redirect_if_movie_not_found
+        redirect_if_not_owner
         erb :'/movies/edit'
     end
 
     get '/movies/:id' do
         redirect_if_not_logged_in
         find_movie
+        redirect_if_not_owner
         session[:movie_id] = @movie.id if @movie
         redirect_if_movie_not_found
         erb :'movies/show'
     end
 
     post '/movies' do
-        movie = Movie.new(params[:movie])
-
+        movie = current_user.movies.build(params[:movie])
         if movie.save
             redirect '/movies'
         else  
@@ -48,7 +49,9 @@ class MoviesController < ApplicationController
 
     delete '/movies/:id' do
         find_movie
-        @movie.destroy if @movie
+        redirect_if_movie_not_found
+        redirect_if_not_owner
+        @movie.destroy
         redirect "/movies"
     end
 
@@ -59,5 +62,9 @@ class MoviesController < ApplicationController
 
         def redirect_if_movie_not_found
             redirect "/movies" unless @movie
+        end
+
+        def redirect_if_not_owner
+            redirect "/movies" unless @movie.user == current_user
         end
 end
