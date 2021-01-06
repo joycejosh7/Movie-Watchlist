@@ -1,21 +1,25 @@
 class MoviesController < ApplicationController
     get '/movies' do
+        redirect_if_not_logged_in
         @movies = Movie.all 
         @movie = Movie.find_by_id(session[:movie_id])
         erb :'movies/index'
     end
 
     get '/movies/new' do
+        redirect_if_not_logged_in
         erb :'movies/new'
     end
 
     get '/movies/:id/edit' do
+        redirect_if_not_logged_in
         find_movie
         redirect_if_movie_not_found
         erb :'/movies/edit'
     end
 
     get '/movies/:id' do
+        redirect_if_not_logged_in
         find_movie
         session[:movie_id] = @movie.id if @movie
         redirect_if_movie_not_found
